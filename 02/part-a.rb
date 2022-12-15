@@ -85,14 +85,6 @@ class Round
 
 end
 
-def retrieve_lines(filename)
-    contents = Array.new
-    File.open(filename, "r") { |file|
-        contents = file.readlines
-    }
-    contents
-end
-
 rounds = retrieve_lines("input")
 rounds.map! do |round|
     Round.new(round).determine_score
