@@ -1,10 +1,4 @@
-def retrieve_lines(filename)
-    contents = Array.new
-    File.open(filename, "r") { |file|
-        contents = file.readlines
-    }
-    contents
-end
+require '../common'
 
 def calc_calories_per_elf
     contents = retrieve_lines("example")

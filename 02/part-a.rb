@@ -1,3 +1,5 @@
+require '../common'
+
 SCORES = {
     'win' => 6,
     'draw' => 3,
@@ -76,7 +78,6 @@ class Round
 
     def determine_score
         outcome = determine_outcome
-        puts outcome
         @score = 
             @your_choice.score +
             SCORES[outcome]
