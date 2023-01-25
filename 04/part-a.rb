@@ -1,33 +1,42 @@
 require "./shared"
-require "pry"
 
-# sections_per_pair = retrieve_input
-sections_per_pair = retrieve_example
+sections_per_pair = retrieve_input
+# sections_per_pair = retrieve_example
+
+def start_of_first(pair)
+    pair[0][:start]
+end
+
+def start_of_second(pair)
+    pair[1][:start]
+end
+
+def end_of_first(pair)
+    pair[0][:end]
+end
+
+def end_of_second(pair)
+    pair[1][:end]
+end
 
 def first_contains_second(pair)
-    pair[0][:start] <= pair[1][:start] && pair[0][:end] >= pair[1][:end]
+    start_of_first(pair) <= start_of_second(pair) && end_of_first(pair) >= end_of_second(pair)
 end
 
 def second_contains_first(pair)
-    pair[0][:start] >= pair[1][:start] && pair[0][:end] <= pair[1][:end]
+    start_of_first(pair) >= start_of_second(pair) && end_of_first(pair) <= end_of_second(pair)
 end
 
-sections_per_pair_per_elf = sections_per_pair.map do |pair| 
-    pair_per_elf = pair.chomp.split(",")
-    binding.pry
+sections_per_pair_per_elf = sections_per_pair.filter do |pair| 
+    pair_per_elf = pair.split(",")
     parsed_pair = pair_per_elf.map do |range|
-        binding.pry
-        s, e = range.split("-")
+        s, e = range.split("-").map { |bound| bound.to_i }
         {
             :start => s,
             :end => e
         }
     end
-    binding.pry if parsed_pair[0] = ""
-    1 if second_contains_first(parsed_pair)
-    1 if first_contains_second(parsed_pair)
-    0
+    true if second_contains_first(parsed_pair) || first_contains_second(parsed_pair)
 end
 
-p sections_per_pair_per_elf
-p sections_per_pair_per_elf.sum
+p sections_per_pair_per_elf.length
