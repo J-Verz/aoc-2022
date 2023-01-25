@@ -8,3 +8,11 @@ def retrieve_lines(filename)
     }
     contents
 end
+
+def retrieve_example
+    retrieve_lines("example")
+end
+
+def retrieve_input
+    retrieve_lines("input")
+end
