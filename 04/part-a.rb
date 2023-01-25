@@ -1,42 +1,42 @@
 require "./shared"
 
-sections_per_pair = retrieve_input
-# sections_per_pair = retrieve_example
+all_pairs = retrieve_input
+# all_pairs = retrieve_example
 
-def start_of_first(pair)
-    pair[0][:start]
-end
+class Range
+    attr_reader :start, :end
 
-def start_of_second(pair)
-    pair[1][:start]
-end
-
-def end_of_first(pair)
-    pair[0][:end]
-end
-
-def end_of_second(pair)
-    pair[1][:end]
-end
-
-def first_contains_second(pair)
-    start_of_first(pair) <= start_of_second(pair) && end_of_first(pair) >= end_of_second(pair)
-end
-
-def second_contains_first(pair)
-    start_of_first(pair) >= start_of_second(pair) && end_of_first(pair) <= end_of_second(pair)
-end
-
-sections_per_pair_per_elf = sections_per_pair.filter do |pair| 
-    pair_per_elf = pair.split(",")
-    parsed_pair = pair_per_elf.map do |range|
-        s, e = range.split("-").map { |bound| bound.to_i }
-        {
-            :start => s,
-            :end => e
-        }
+    def initialize(unparsed_range)
+        @start, @end = unparsed_range.split("-").map {|bound| bound.to_i}
     end
-    true if second_contains_first(parsed_pair) || first_contains_second(parsed_pair)
 end
 
-p sections_per_pair_per_elf.length
+class Pair
+    def initialize(unparsed_pair)
+        @first, @second = unparsed_pair.split(",").map do |range|
+            Range.new range
+        end
+    end
+
+    def one_range_contains_another
+        true if first_contains_second or second_contains_first
+    end
+
+    private
+
+    def first_contains_second
+        @first.start <= @second.start && @first.end >= @second.end
+    end
+
+    def second_contains_first
+        @first.start >= @second.start && @first.end <= @second.end
+    end
+end
+
+
+pairs_where_one_section_contains_another = all_pairs.filter do |pair| 
+    pair_of_ranges = Pair.new pair
+    pair_of_ranges.one_range_contains_another
+end
+
+p pairs_where_one_section_contains_another.length
