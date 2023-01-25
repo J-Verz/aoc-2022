@@ -6,7 +6,7 @@ def retrieve_lines(filename)
     File.open(filename, "r") { |file|
         contents = file.readlines
     }
-    contents
+    contents.map {|line| line.chomp }
 end
 
 def retrieve_example
