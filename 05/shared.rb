@@ -99,8 +99,12 @@ module Shared
       @crates.push crate
     end
 
-    def pop
-      @crates.pop
+    def pop(n = 1)
+      if n == 1
+        @crates.pop
+      else
+        @crates.pop n
+      end
     end
 
     def top
