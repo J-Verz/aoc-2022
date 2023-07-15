@@ -4,7 +4,7 @@ module Shared
   module ChallengeExecutor
     def run
       # Get input and parse to data model
-      self.parse_input Common::InputReader.example
+      self.parse_input Common::InputReader.real
       # Execute instructions
       self.execute_instructions
       # Tell elves which crates are on top
@@ -99,12 +99,16 @@ module Shared
       @crates.push crate
     end
 
-    def pop(n = 1)
-      if n == 1
-        @crates.pop
-      else
-        @crates.pop n
-      end
+    def pop
+      @crates.pop
+    end
+
+    def pop_multiple(n)
+      @crates.pop n
+    end
+
+    def add(other_crates)
+      @crates += other_crates
     end
 
     def top
