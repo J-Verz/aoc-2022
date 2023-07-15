@@ -43,7 +43,7 @@ class Round
     attr_reader :outcome, :opponents_choice
 end
 
-rounds = InputReader.real
+rounds = Common::InputReader.real
 rounds.map! do |round|
     Round.new(round).determine_score
 end

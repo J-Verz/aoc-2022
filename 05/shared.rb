@@ -4,7 +4,7 @@ module Shared
   module ChallengeExecutor
     def run
       # Get input and parse to data model
-      self.parse_input InputReader.example
+      self.parse_input Common::InputReader.example
       # Execute instructions
       self.execute_instructions
       # Tell elves which crates are on top
