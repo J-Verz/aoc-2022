@@ -23,8 +23,8 @@ class FaultyRucksack < Rucksack
   end
 end
 
-# contents_of_all_rucksacks = retrieve_lines("example")
-contents_of_all_rucksacks = retrieve_lines("input")
+# contents_of_all_rucksacks = InputReader.example
+contents_of_all_rucksacks = InputReader.real
 
 rucksacks = contents_of_all_rucksacks.map do |rucksack_contents|
   FaultyRucksack.new(rucksack_contents)

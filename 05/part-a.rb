@@ -4,7 +4,7 @@ require 'pry-rescue'
 class PartA
     def self.run
         # Get input and parse to data model
-        self.parse_input retrieve_input
+        self.parse_input InputReader.real
         # Execute instructions
         self.execute_instructions
         # Tell elves which crates are on top

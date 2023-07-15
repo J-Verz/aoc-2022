@@ -36,7 +36,7 @@ class Round
 
 end
 
-rounds = retrieve_lines("input")
+rounds = InputReader.real
 rounds.map! do |round|
     Round.new(round).determine_score
 end

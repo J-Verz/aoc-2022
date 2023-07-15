@@ -17,8 +17,8 @@ class Group
   end
 end
 
-# contents_of_all_rucksacks = retrieve_lines("example")
-contents_of_all_rucksacks = retrieve_lines("input")
+# contents_of_all_rucksacks = InputReader.example
+contents_of_all_rucksacks = InputReader.real
 groups = Array.new
 while contents_of_all_rucksacks.length > 0
   group_contents = contents_of_all_rucksacks.shift(3)

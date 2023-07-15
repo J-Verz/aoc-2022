@@ -1,7 +1,7 @@
 require "./shared"
 
-all_pairs = retrieve_input
-# all_pairs = retrieve_example
+all_pairs = InputReader.real
+# all_pairs = InputReader.example
 
 
 pairs_which_overlap = all_pairs.filter do |pair| 

@@ -1,8 +1,8 @@
 require '../common'
 
 def calc_calories_per_elf
-    contents = retrieve_lines("example")
-    contents = retrieve_lines("input")
+    # contents = InputReader.example
+    contents = InputReader.real
     calories_per_elf = Array.new
     calories_of_current_elf = 0
     while contents.length > 0 do
