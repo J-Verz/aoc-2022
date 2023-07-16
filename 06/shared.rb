@@ -25,10 +25,6 @@ module Shared
       @arr == obj.arr
     end
 
-    def to_s
-      @arr.to_s
-    end
-
     def length
       @arr.length
     end
