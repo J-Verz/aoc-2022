@@ -33,6 +33,28 @@ module Shared
     end
   end
 
+  class ConditionChecker
+    def self.check(tree_root, &block)
+      @block = block
+      @result = []
+      self.recursive_check tree_root
+      self.add_element_based_on_condition tree_root
+      @result
+    end
+
+    def self.recursive_check(element)
+      element.children.each do |child|
+        next unless child.is_a? Shared::Folder
+        self.recursive_check child
+        self.add_element_based_on_condition child
+      end
+    end
+
+    def self.add_element_based_on_condition(element)
+      @result.push element if @block.call element
+    end
+  end
+
   class Folder
     attr_reader :parent, :name
 
