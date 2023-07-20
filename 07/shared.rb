@@ -1,53 +1,54 @@
-require '../common'
+require "../common"
 
 module Shared
-    
+  class Folder
+    attr_reader :parent, :name
 
-    class Root
-        def initialize
-            @children = []
-        end
-
-        def add_child(element)
-            @children.push element
-        end
-
-        def size
-            @children.map(&:size).sum
-        end
-
-        def name
-            '/'
-        end
-
-        def parent
-            raise 'The Root folder does not have a parent'
-        end
+    def initialize(name, parent)
+      @name = name
+      @parent = parent
+      parent.add_child self
+      @children = {}
     end
 
-    class Folder
-        attr_reader :parent
-        def initialize(name, parent = nil)
-            @name = name
-            @parent = parent
-            parent.add_child self
-            @children = []
-        end
-
-        def add_child(element)
-            @children.push element
-        end
-
-        def size
-            @children.map(&:size).sum
-        end
+    def add_child(element)
+      @children[element.name] = element
     end
-    
-    class File
-        attr_reader :size
-        def initialize(name, size)
-            @name = name
-            @size = size
-        end
+
+    def size
+      @size ||= children.map(&:size).sum
     end
+
+    def child(name)
+      @children[name]
+    end
+
+    def size_under_100_001?
+      size <= 100_000
+    end
+
+    def children
+      @children.values
+    end
+  end
+
+  class Root < Folder
+    def initialize
+      @name = "/"
+      @children = {}
+    end
+
+    def parent
+      raise "The Root folder does not have a parent"
+    end
+  end
+
+  class File
+    attr_reader :size, :name
+
+    def initialize(name, size)
+      @name = name
+      @size = size
+    end
+  end
 end
