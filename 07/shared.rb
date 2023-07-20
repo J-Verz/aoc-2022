@@ -59,6 +59,10 @@ module Shared
       size <= 100_000
     end
 
+    def size_over(value)
+      size > value
+    end
+
     def children
       @children.values
     end
