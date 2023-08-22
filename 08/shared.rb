@@ -57,6 +57,7 @@ module Shared
 
   class Tree
     attr_reader :height
+    attr_accessor :scenic_score
 
     def initialize(height)
       @height = height
@@ -85,6 +86,10 @@ module Shared
 
     def count_visible_trees
       @grid.flatten.filter_map { |tree| tree.is_visible? }.size
+    end
+
+    def best_scenic_score
+      @grid.flatten.map(&:scenic_score).max
     end
 
     private
