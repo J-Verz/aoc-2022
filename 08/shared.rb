@@ -12,7 +12,7 @@ module Shared
         biggest_height_so_far = -1
         
         depth_enumerator(side, direction[:d]) do |d|
-          tree_currently_observing = @grid.at(map_dw_to_xy(side: side, d: d, w: w))
+          tree_currently_observing = @grid[map_dw_to_xy(side: side, d: d, w: w)]
           
           next if tree_currently_observing.height <= biggest_height_so_far
   
@@ -80,8 +80,8 @@ module Shared
       fill_grid(map)
     end
 
-    def at(x:, y:)
-      @grid[y][x]
+    def [](coords)
+      @grid[coords[:y]][coords[:x]]
     end
 
     def count_visible_trees

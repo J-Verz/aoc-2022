@@ -11,7 +11,7 @@ class PartB
     @grid.size[:x].times do |x|
       @grid.size[:y].times do |y|
         view_point = {x: x, y: y}
-        @grid.at(view_point).scenic_score = 
+        @grid[view_point].scenic_score = 
           self.look_right_from(view_point) *
           self.look_left_from(view_point) *
           self.look_down_from(view_point) *
@@ -58,7 +58,7 @@ class PartB
   end
 
   def self.check_if_neighbour_is_smaller(we, neighbour)
-    @grid.at(we).height <= @grid.at(neighbour).height
+    @grid[we].height <= @grid[neighbour].height
   end
 end
 
