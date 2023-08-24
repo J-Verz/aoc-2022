@@ -1,21 +1,20 @@
 require "fileutils"
 
 desc "Create the default structure for one day of AOC"
-task :scaffold_day, :day_number do |t, args|
+task :scaffold_day, [:day_number] => [:create_example_and_input, :create_shared_file, :create_part_files]
+
+task :change_to_correct_directory do |t, args|
   Dir.chdir args.day_number
-  Rake::Task[:create_example_and_input].invoke
-  Rake::Task[:create_shared_file].invoke
-  Rake::Task[:create_part_files].invoke
 end
 
-task :create_example_and_input do
+task :create_example_and_input => [:change_to_correct_directory] do
   ["example", "input"].each do |file|
     puts "create\t#{file}"
     FileUtils.touch file
   end
 end
 
-task :create_shared_file do
+task :create_shared_file => [:change_to_correct_directory] do
   shared_file_contents = <<~RUBY
     require '../common'
     require 'pry-rescue'
@@ -28,7 +27,7 @@ task :create_shared_file do
   File.write("shared.rb", shared_file_contents)
 end
 
-task :create_part_files do
+task :create_part_files => [:change_to_correct_directory] do
   { "PartA" => "part-a", "PartB" => "part-b" }.each do |klass, file|
     contents = <<~RUBY
       require './shared'
