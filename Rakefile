@@ -10,6 +10,7 @@ end
 
 task :create_example_and_input do
   ["example", "input"].each do |file|
+    puts "create\t#{file}"
     FileUtils.touch file
   end
 end
@@ -23,6 +24,7 @@ task :create_shared_file do
 
     end
   RUBY
+  puts "create\tshared.rb"
   File.write("shared.rb", shared_file_contents)
 end
 
@@ -44,6 +46,7 @@ task :create_part_files do
         #{klass}.run
       end
     RUBY
-    File.write(file + ".rb", contents)
+    puts "create\t#{file}"
+    File.write(file, contents)
   end
 end
