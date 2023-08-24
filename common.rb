@@ -3,19 +3,15 @@
 module Common
   class InputReader
     def self.retrieve_lines(filename)
-      contents = Array.new
-      File.open(filename, "r") { |file|
-        contents = file.readlines
-      }
-      contents.map { |line| line.chomp }
+      contents = File.readlines(filename).map(&:chomp)
     end
 
     def self.example
-      self.retrieve_lines("example")
+      self.retrieve_lines('example')
     end
 
     def self.real
-      self.retrieve_lines("input")
+      self.retrieve_lines('input')
     end
   end
 end
