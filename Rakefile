@@ -28,8 +28,9 @@ task :create_shared_file => [:change_to_correct_directory] do
 end
 
 task :create_part_files => [:change_to_correct_directory] do
-  { "PartA" => "part-a", "PartB" => "part-b" }.each do |klass, file|
+  { "PartA" => "part-a.rb", "PartB" => "part-b.rb" }.each do |klass, file|
     contents = <<~RUBY
+      #!/usr/bin/env ruby
       require './shared'
 
       class #{klass}
@@ -47,5 +48,6 @@ task :create_part_files => [:change_to_correct_directory] do
     RUBY
     puts "create\t#{file}"
     File.write(file, contents)
+    FileUtils.chmod 'u+x', file
   end
 end
