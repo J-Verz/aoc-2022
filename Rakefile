@@ -16,6 +16,7 @@ end
 
 task :create_shared_file => [:change_to_correct_directory] do
   shared_file_contents = <<~RUBY
+    # frozen_string_literal: true
     require '../common'
     require 'pry-rescue'
 
@@ -31,6 +32,7 @@ task :create_part_files => [:change_to_correct_directory] do
   { "PartA" => "part-a.rb", "PartB" => "part-b.rb" }.each do |klass, file|
     contents = <<~RUBY
       #!/usr/bin/env ruby
+      # frozen_string_literal: true
       require './shared'
 
       class #{klass}
