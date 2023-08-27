@@ -20,8 +20,8 @@ class PartA
     head = Shared::RopeHead.new
     tail = Shared::RopeTail.new
     input.each do |movement|
-      movement[1].to_i.times do
-        head.send movement[0]
+      movement[:amount].times do
+        head.send movement[:direction]
         tail.follow head
         debug "HEAD #{head.position}", "TAIL #{tail.position}"
       end
@@ -33,9 +33,11 @@ class PartA
 
   def self.parse_input(input)
     input.map do |line|
-      line.split(' ').tap do |instruction|
-        instruction[0] = DIRECTION_TO_METHOD.dig(instruction[0])
-      end
+      movement = line.split ' '
+      {
+        :direction => DIRECTION_TO_METHOD.dig(movement[0]),
+        :amount => movement[1].to_i
+      }
     end
   end
 end
