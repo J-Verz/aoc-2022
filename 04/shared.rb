@@ -1,4 +1,6 @@
-require "../common"
+require_relative '../common'
+
+DAY = '04'
 
 class Range
     attr_reader :start, :end

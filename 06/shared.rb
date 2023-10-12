@@ -1,4 +1,6 @@
-require "../common"
+require_relative '../common'
+
+DAY = '06'
 
 module Shared
   class FIFOBuffer

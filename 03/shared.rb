@@ -1,4 +1,6 @@
-require "../common"
+require_relative '../common'
+
+DAY = '03'
 
 class Rucksack
   attr_reader :contents

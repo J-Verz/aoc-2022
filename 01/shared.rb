@@ -1,4 +1,6 @@
-require '../common'
+require_relative '../common'
+
+DAY = '01'
 
 def calc_calories_per_elf
     # contents = Common::InputReader.example

@@ -1,4 +1,4 @@
-require './shared'
+require_relative './shared'
 
 class Round
     def initialize(round_description)

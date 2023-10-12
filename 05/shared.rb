@@ -1,4 +1,6 @@
-require "../common"
+require_relative '../common'
+
+DAY = '05'
 
 module Shared
   module ChallengeExecutor

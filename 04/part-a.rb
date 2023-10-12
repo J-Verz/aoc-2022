@@ -1,4 +1,4 @@
-require "./shared"
+require_relative './shared'
 
 all_pairs = Common::InputReader.real
 # all_pairs = Common::InputReader.example

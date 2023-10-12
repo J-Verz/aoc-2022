@@ -1,5 +1,6 @@
-require '../common'
+require_relative '../common'
 
+DAY = '02'
 
 SCORES = {
     'win' => 6,

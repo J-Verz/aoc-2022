@@ -1,4 +1,4 @@
-require "./shared"
+require_relative './shared'
 
 class FaultyRucksack < Rucksack
   def initialize(raw_contents)

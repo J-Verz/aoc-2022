@@ -3,7 +3,11 @@ require "fileutils"
 desc "Create the default structure for one day of AOC"
 task :scaffold_day, [:day_number] => [:create_example_and_input, :create_shared_file, :create_part_files]
 
-task :change_to_correct_directory do |t, args|
+task :make_directory_if_not_there do |t, args|
+  Dir.mkdir args.day_number unless Dir.exist? args.day_number
+end
+
+task :change_to_correct_directory => [:make_directory_if_not_there] do |t, args|
   Dir.chdir args.day_number
 end
 
@@ -14,11 +18,13 @@ task :create_example_and_input => [:change_to_correct_directory] do
   end
 end
 
-task :create_shared_file => [:change_to_correct_directory] do
+task :create_shared_file => [:change_to_correct_directory] do |t, args|
   shared_file_contents = <<~RUBY
     # frozen_string_literal: true
-    require '../common'
+    require_relative '../common'
     require 'pry-rescue'
+
+    DAY = "#{args.day_number}"
 
     module Shared
 
@@ -33,7 +39,7 @@ task :create_part_files => [:change_to_correct_directory] do
     contents = <<~RUBY
       #!/usr/bin/env ruby
       # frozen_string_literal: true
-      require './shared'
+      require_relative './shared'
 
       class #{klass}
         def self.run

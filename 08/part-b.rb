@@ -1,4 +1,4 @@
-require './shared'
+require_relative './shared'
 
 class PartB
   extend Shared::ScenicScoreCalculator

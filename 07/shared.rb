@@ -1,4 +1,6 @@
-require "../common"
+require_relative '../common'
+
+DAY = '07'
 
 module Shared
   class DirectoryTreeParser

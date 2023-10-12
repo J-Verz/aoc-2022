@@ -1,4 +1,4 @@
-require "./shared"
+require_relative './shared'
 
 class PartA
   def self.run

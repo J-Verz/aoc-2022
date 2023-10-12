@@ -1,4 +1,4 @@
-require "./shared"
+require_relative './shared'
 
 class Group
   attr_reader :common_item

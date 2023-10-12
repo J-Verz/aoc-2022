@@ -3,7 +3,9 @@
 module Common
   class InputReader
     def self.retrieve_lines(filename)
-      contents = File.readlines(filename).map(&:chomp)
+      pwd = File.dirname(File.expand_path(__FILE__))
+      path = File.join pwd, DAY, filename
+      contents = File.readlines(path).map(&:chomp)
     end
 
     def self.example

@@ -1,8 +1,33 @@
 # frozen_string_literal: true
-require '../common'
+require_relative '../common'
 require 'pry-rescue'
+require 'pp'
+
+DAY = '09'
+
+def debug(*values)
+  puts values if ARGV[0] == "--debug"
+end
 
 module Shared
+  module InputParser
+    DIRECTION_TO_METHOD = {
+      "U" => :up,
+      "D" => :down,
+      "R" => :right,
+      "L" => :left,
+    }
+
+    def parse_input(input)
+      input.map do |line|
+        movement = line.split ' '
+        {
+          :direction => DIRECTION_TO_METHOD.dig(movement[0]),
+          :amount => movement[1].to_i
+        }
+      end
+    end
+  end
   module VisitedCoordinatesTracker
     attr_reader :visited_coordinates
 
@@ -49,11 +74,36 @@ module Shared
     end
   end
 
+  class Rope
+    def initialize(size)
+      @sections = Array.new(size) { Shared::RopeSection.new }
+    end
+
+    def head
+      @sections.first
+    end
+
+    def tail
+      @sections.last
+    end
+
+    def beheaded
+      @sections.drop(1)
+    end
+
+    def move(direction)
+      head.send direction
+      beheaded.zip(@sections).each {|sections| sections[0].follow sections[1] }
+    end
+  end
+
   class RopeSection
+    include Shared::VisitedCoordinatesTracker
     attr_reader :position
 
     def initialize
       @position = Coords.new
+      setup_visited_coordinates
     end
 
     def name
@@ -82,17 +132,6 @@ module Shared
       debug "#{self.name} going left"
       @position.x -= 1
       self
-    end
-  end
-
-  class RopeHead < RopeSection; end
-
-  class RopeTail < RopeSection
-    include Shared::VisitedCoordinatesTracker
-
-    def initialize
-      super
-      setup_visited_coordinates
     end
 
     def follow(predecessor)
@@ -123,6 +162,17 @@ module Shared
         self.down.right
       when { x: 2, y: 1 }
         self.down.left
+      when { x: -1, y: 0 }
+      when { x: 1, y: 0 }
+      when { x: 0, y: 1 }
+      when { x: 0, y: -1 }
+      when { x: 0, y: 0 }
+      when { x: 1, y: 1 }
+      when { x: -1, y: -1 }
+      when { x: 1, y: -1 }
+      when { x: -1, y: 1 }
+      else
+        raise 'Difference wrong'
       end
       mark_coordinates_as_visited self.position
     end

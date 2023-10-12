@@ -1,14 +1,21 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-require './shared'
+require_relative './shared'
 
 class PartB
+  extend Shared::InputParser
+
   def self.run
-    input = Common::InputReader.example
-
+    input = self.parse_input Common::InputReader.real
+    rope = Shared::Rope.new 10
+    input.each do |movement|
+      movement[:amount].times do
+        rope.move movement[:direction]
+        binding.pry
+      end
+    end
+    puts rope.tail.unique_visited_coordinates
   end
-
-  private
 end
 
 if __FILE__ == $0

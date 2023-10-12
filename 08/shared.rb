@@ -1,5 +1,7 @@
-require "../common"
+require_relative '../common'
 require "pry-rescue"
+
+DAY = '08'
 
 module Shared
   module TreeGridInspector
