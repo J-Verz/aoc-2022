@@ -4,13 +4,16 @@ require_relative './shared'
 
 
 class PartA
+  extend Shared::Instructions
+  extend Shared::Counter
+
   IMPORTANT_CYCLES = [20, 60, 100, 140, 180, 220]
 
   def self.run
-    input = Common::InputReader.real
     @result = 0
     @counter = 0
     @xRegister = 1
+    input = Common::InputReader.real
     input.each do |instruction|
       command, parameter = instruction.split(' ')
       send(command, parameter)
@@ -20,26 +23,10 @@ class PartA
 
   private
 
-  def self.noop(ignore)
-    puts 'doing nothing'
-    increment_and_check_counter
-  end
+  def self.before_counter_increment; end
 
-  
-  def self.addx(value)
-    increment_and_check_counter
-    increment_and_check_counter
-    @xRegister += value.to_i
-    puts "adding #{value}"
-  end
-
-  def self.increment_and_check_counter
-    increment_counter
+  def self.after_counter_increment
     save_register_state if check_if_counter_at_important_value
-  end
-
-  def self.increment_counter
-    @counter += 1
   end
 
   def self.check_if_counter_at_important_value

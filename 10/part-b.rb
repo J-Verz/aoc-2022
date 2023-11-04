@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 require_relative './shared'
 
-class CRTScreen
+class CRT
   def initialize
     @screen = Array.new 6*40, false
   end
@@ -25,35 +25,28 @@ class CRTScreen
 end
 
 class PartB
+  extend Shared::Instructions
+  extend Shared::Counter
+
   def self.run
     @counter = 0
     @xRegister = 1
-    @crt = CRTScreen.new
+    @crt = CRT.new
     input = Common::InputReader.real
     input.each do |instruction|
       command, parameter = instruction.split(' ')
-      self.send(command, parameter)
+      send(command, parameter)
     end
     @crt.render
   end
 
   private
 
-  def self.noop(ignore)
-    increment_counter_and_set_pixel
-  end
-
-  
-  def self.addx(value)
-    increment_counter_and_set_pixel
-    increment_counter_and_set_pixel
-    @xRegister += value.to_i
-  end
-
-  def self.increment_counter_and_set_pixel
+  def self.before_counter_increment
     set_pixel if sprite_covers_current_pixel
-    increment_counter
   end
+  
+  def self.after_counter_increment; end
 
   def self.sprite_covers_current_pixel
     ((@counter % 40) - @xRegister).abs <= 1
@@ -61,10 +54,6 @@ class PartB
 
   def self.set_pixel
     @crt.set @counter
-  end
-  
-  def self.increment_counter
-    @counter += 1
   end
 end
 
