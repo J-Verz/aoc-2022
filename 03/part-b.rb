@@ -17,8 +17,8 @@ class Group
   end
 end
 
-# contents_of_all_rucksacks = Common::InputReader.example
-contents_of_all_rucksacks = Common::InputReader.real
+# contents_of_all_rucksacks = Common::InputReader.example.per_line
+contents_of_all_rucksacks = Common::InputReader.real.per_line
 groups = Array.new
 while contents_of_all_rucksacks.length > 0
   group_contents = contents_of_all_rucksacks.shift(3)

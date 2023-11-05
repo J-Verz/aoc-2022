@@ -6,7 +6,7 @@ class PartB
   extend Shared::InputParser
 
   def self.run
-    input = self.parse_input Common::InputReader.real
+    input = self.parse_input Common::InputReader.real.per_line
     rope = Shared::Rope.new 10
     input.each do |movement|
       movement[:amount].times do

@@ -4,7 +4,7 @@ DAY = '01'
 
 def calc_calories_per_elf
     # contents = Common::InputReader.example
-    contents = Common::InputReader.real
+    contents = Common::InputReader.real.per_line
     calories_per_elf = Array.new
     calories_of_current_elf = 0
     while contents.length > 0 do

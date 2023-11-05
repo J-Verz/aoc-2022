@@ -35,7 +35,7 @@ module Shared
   module MarkerFinder
     def find_marker(length)
       @marker_length = length
-      input = Common::InputReader.real.first.chars
+      input = Common::InputReader.real.per_line.first.chars
       @buffer = Shared::FIFOBuffer.new(length)
       input.each_with_index do |char, index|
         @buffer.push char

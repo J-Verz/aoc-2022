@@ -4,7 +4,7 @@ class PartB
   extend Shared::ScenicScoreCalculator
 
   def self.run
-    input = Common::InputReader.real
+    input = Common::InputReader.real.per_line
     @grid = Shared::TreeGrid.new(input)
     puts self.find_best_scenic_score
   end

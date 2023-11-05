@@ -2,7 +2,7 @@ require_relative './shared'
 
 class PartB
   def self.run
-    input = Common::InputReader.real
+    input = Common::InputReader.real.per_line
     @root = Shared::DirectoryTreeParser.parse input
     puts self.find_smallest_folder_thats_big_enough
   end

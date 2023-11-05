@@ -36,7 +36,7 @@ class Round
 
 end
 
-rounds = Common::InputReader.real
+rounds = Common::InputReader.real.per_line
 rounds.map! do |round|
     Round.new(round).determine_score
 end

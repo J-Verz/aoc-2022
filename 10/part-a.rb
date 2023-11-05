@@ -13,7 +13,7 @@ class PartA
     @result = 0
     @counter = 0
     @xRegister = 1
-    input = Common::InputReader.real
+    input = Common::InputReader.real.per_line
     input.each do |instruction|
       command, parameter = instruction.split(' ')
       send(command, parameter)

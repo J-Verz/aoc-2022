@@ -4,7 +4,7 @@ class PartA
   extend Shared::TreeGridInspector
   
   def self.run
-    input = Common::InputReader.real
+    input = Common::InputReader.real.per_line
     @grid = Shared::TreeGrid.new(input)
     self.find_visible_trees
     puts @grid.count_visible_trees

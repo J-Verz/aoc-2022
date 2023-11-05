@@ -32,7 +32,7 @@ class PartB
     @counter = 0
     @xRegister = 1
     @crt = CRT.new
-    input = Common::InputReader.real
+    input = Common::InputReader.real.per_line
     input.each do |instruction|
       command, parameter = instruction.split(' ')
       send(command, parameter)

@@ -23,8 +23,8 @@ class FaultyRucksack < Rucksack
   end
 end
 
-# contents_of_all_rucksacks = Common::InputReader.example
-contents_of_all_rucksacks = Common::InputReader.real
+# contents_of_all_rucksacks = Common::InputReader.example.per_line
+contents_of_all_rucksacks = Common::InputReader.real.per_line
 
 rucksacks = contents_of_all_rucksacks.map do |rucksack_contents|
   FaultyRucksack.new(rucksack_contents)

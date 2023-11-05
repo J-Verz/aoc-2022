@@ -2,7 +2,7 @@ require_relative './shared'
 
 class PartA
   def self.run
-    input = Common::InputReader.real
+    input = Common::InputReader.real.per_line
     @root = Shared::DirectoryTreeParser.parse input
     puts self.sum_of_sizes_under_100_001
   end
